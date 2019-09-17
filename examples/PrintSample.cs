@@ -13,6 +13,7 @@ namespace JakubSturc.Talks.UnicodeWithDotNet
         public void Run()
         {
             Console.WriteLine($"Slovak Alphabet: {SlovakAlphabet}");
+            Console.WriteLine($"Greek Alphabet: {GreekAlphabet}");
             Console.WriteLine($"Hebrew Alphabet: {HebrewAlphabet}");
             Console.WriteLine($"Some Hangul: {SomeHangul}");
             Console.WriteLine($"Simplified Chinese: {SimplifiedChinese}");
@@ -22,6 +23,7 @@ namespace JakubSturc.Talks.UnicodeWithDotNet
         }
 
         private static string SlovakAlphabet = "AÁÄBCČDĎDzDžEÉFGHChIÍJKLĹĽMNŇOÓÔPQRŔSŠTŤUÚVWXYÝZŽ";
+        private static string GreekAlphabet = "αβγδεζηθικλμνξοπρστυφχψω";
         private static string HebrewAlphabet = GetUtf32Range(0x05D0, 0x05EA);
         private static string SomeHangul = "한글은 발음기관과 하늘";
         private static string SimplifiedChinese = "簡化字";
