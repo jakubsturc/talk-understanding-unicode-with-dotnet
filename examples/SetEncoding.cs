@@ -15,35 +15,25 @@ namespace JakubSturc.Talks.UnicodeWithDotNet
             Console.WriteLine($"Current input encoding: {Console.InputEncoding.WebName}");
             Console.WriteLine($"Current output encoding: {Console.OutputEncoding.WebName}");
             Console.WriteLine();
+
             Console.WriteLine("Select endcoding:");
-            Console.WriteLine("1. ASCII");
-            Console.WriteLine("2. UTF8");
-            Console.WriteLine("3. UTF16");
-            Console.WriteLine("4. UTF32");
-            Console.WriteLine("0. Cancel");
-            Console.Write("> ");
+
+            var encodings = Encoding.GetEncodings();
+            for (int i = 0; i < encodings.Length; i++)
+            {
+                Console.WriteLine($"{i}. {encodings[i].Name}");
+            }
+                Console.Write("> ");
 
             var input = Console.ReadLine();
 
-            switch (input)
+            if (int.TryParse(input, out int index))
             {
-                case "0":
-                    return;
-                case "1":
-                    Set(Encoding.ASCII);
-                    break;
-                case "2":
-                    Set(Encoding.UTF8);
-                    break;
-                case "3":
-                    Set(Encoding.Unicode);
-                    break;
-                case "4":
-                    Set(Encoding.UTF32);
-                    break;
-                default:
-                    Run();
-                    break;
+                Set(Encoding.GetEncoding(encodings[index].CodePage));
+            }
+            else
+            {
+                return;
             }
 
             Console.WriteLine($"Current input encoding: {Console.InputEncoding.WebName}");
