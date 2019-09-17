@@ -81,7 +81,7 @@ namespace JakubSturc.Talks.UnicodeWithDotNet
                 .Where(t => t.IsClass & !t.IsAbstract)
                 .Where(c => icommand.IsAssignableFrom(c));
             var instances = implementations.Select(c => (ICommand)Activator.CreateInstance(c));
-            return instances.ToDictionary(i => i.Code);
+            return instances.ToDictionary(i => i.Code, StringComparer.OrdinalIgnoreCase);
         }
     }
 }
