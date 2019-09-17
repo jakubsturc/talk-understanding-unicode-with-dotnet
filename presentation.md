@@ -282,7 +282,7 @@ note: https://unicode.org/Public/emoji/12.0/
 
 ---
 
-## Some amusing scripts
+## Some amusment
 
 --
 
@@ -307,15 +307,55 @@ note: https://unicode.org/Public/emoji/12.0/
 
 Unlike previous symbols we can use *uʍop ǝpᴉsdn* to name methods, classes and variables in C#.
 
+--
+
+### The mongolian vowel separator
+
+> The Mongolian Vowel Separator (U+180E) has had an interesting life. It was introduced in Unicode 3.0.0, when it was in the Cf category (“other, formatting”). Then in Unicode 4.0.0 it was moved into the Zs (separator, space) category. In Unicode 6.3.0 it was then moved back to the Cf category.
+
+note: source https://codeblog.jonskeet.uk/2014/12/01/when-is-an-identifier-not-an-identifier-attack-of-the-mongolian-vowel-separator/
+
 ---
 
 ## In .NET
 
 --
 
-### `String`
+### Foundation
 
-> Represents text as a sequence of UTF-16 code units.
+> A `String` represents text as a sequence of UTF-16 code units.
+> A `Char` represents a character as a UTF-16 code unit.
+
+--
+
+```csharp
+"ⓐⓑⓒⓓⓔⓕⓖ".ToUpper(); // ⒶⒷⒸⒹⒺⒻⒼ
+"💩".Length; // 2
+"👨‍👩‍👧‍👦".Lengthl // 11;
+```
+
+--
+
+```csharp
+var str1 = "\u0160turc";    // Šturc
+var str2 = "S\u030Cturc";   // Šturc
+str1 == str2;               // false
+str3 = str2.Normalize();
+str1 == str3;               // true
+
+String.Equals(str1, str2, StringComparison.Ordinal));
+                            // false
+String.Equals(str1, str2, StringComparison.InvariantCulture);
+                            // true
+```
+
+--
+
+```csharp
+var str = "ⓐⓑⓒⓓⓔⓕⓖ";
+str1.Normalize(NormalizationForm.FormC)   // ⓐⓑⓒⓓⓔⓕⓖ
+str1.Normalize(NormalizationForm.FormKC)  // abcdefg
+```
 
 --
 
@@ -323,23 +363,23 @@ Unlike previous symbols we can use *uʍop ǝpᴉsdn* to name methods, classes an
 
 * `Encoding.ASCII`
 * `Encoding.UTF8`
-* `Encoding.Unicode`
+* `Encoding.Unicode` // UTF16
 * `Encoding.BigEndianUnicode`
 * `Encoding.UTF32`
 * `Encoding.GetEncoding("windows-1250")`
 
 --
 
+### Demo - working with `Console`
+
+--
+
 ### Demo - Unpair Surrogate
 
----
+--
 
-* BOM
-* Emoji
-* Special Scripts
-* Normal forms
-* In .NET
- * Setup console
- * Reading/Writing files
- * Everything above
+### .NET Core 3.0
+
+* `Utf8String`
+* `Rune`
 
